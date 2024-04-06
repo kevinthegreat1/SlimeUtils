@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "slimeutils",
+	"version": "${version}",
+	"name": "Slime Utils",
+	"description": "Tweak slime chunk chances and show slime chunks",
+	"authors": [
+		"Kevinthegreat"
+	],
+	"contact": {
+		"homepage": "https://github.com/kevinthegreat1/SlimeUtils",
+		"sources": "https://github.com/kevinthegreat1/SlimeUtils",
+		"issues": "https://github.com/kevinthegreat1/SlimeUtils/issues"
+	},
+	"license": "GPL-3.0-or-later",
+	"icon": "assets/slimeutils/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.kevinthegreat.slimeutils.SlimeUtils"
+		],
+		"client": [
+			"com.kevinthegreat.slimeutils.SlimeUtilsClient"
+		]
+	},
+	"mixins": [
+		"slimeutils.mixins.json",
+		{
+			"config": "slimeutils.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.9",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
