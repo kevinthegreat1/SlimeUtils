@@ -13,7 +13,13 @@ import java.util.function.Supplier;
 public class SlimeUtilsTest {
     private static final Supplier<Random> RANDOM_SUPPLIER = () -> Random.create(2358574256742911494L);
     private static final int CASES = 100000;
-    private LongSet seeds = new LongOpenHashSet();
+    private LongSet seeds;
+
+    @Order(10)
+    @Test
+    void testIsSlimeChunkNegative1Percent() {
+        testIsSlimeChunk(-1, 0);
+    }
 
     @Order(0)
     @Test
@@ -23,59 +29,83 @@ public class SlimeUtilsTest {
 
     @Order(-1)
     @Test
+    void testIsSlimeChunk0Point1Percent() {
+        testIsSlimeChunk(0.1, 98);
+    }
+
+    @Order(-10)
+    @Test
     void testIsSlimeChunk1Percent() {
         testIsSlimeChunk(1, 944);
     }
 
-    @Order(-2)
+    @Order(-20)
     @Test
     void testIsSlimeChunk2Percent() {
         testIsSlimeChunk(2, 1908);
     }
 
-    @Order(-9)
+    @Order(-90)
     @Test
     void testIsSlimeChunk9PercentDefault() {
         testIsSlimeChunk(9, 8994);
     }
 
-    @Order(-10)
+    @Order(-100)
     @Test
     void testIsSlimeChunk10PercentDefault() {
         testIsSlimeChunk(10, 9992);
     }
 
-    @Order(-11)
+    @Order(-110)
     @Test
     void testIsSlimeChunk11PercentDefault() {
         testIsSlimeChunk(11, 11046);
     }
 
-    @Order(-20)
+    @Order(-200)
     @Test
     void testIsSlimeChunk20Percent() {
         testIsSlimeChunk(20, 20094);
     }
 
-    @Order(-50)
+    @Order(-500)
     @Test
     void testIsSlimeChunk50Percent() {
         testIsSlimeChunk(50, 49987);
     }
 
-    @Order(-99)
+    @Order(-990)
     @Test
     void testIsSlimeChunk99Percent() {
         testIsSlimeChunk(99, 98998);
     }
 
-    @Order(-100)
+    @Order(-999)
+    @Test
+    void testIsSlimeChunk99Point9Percent() {
+        testIsSlimeChunk(99.9, 99896);
+    }
+
+    @Order(-1000)
     @Test
     void testIsSlimeChunk100Percent() {
         testIsSlimeChunk(100, 100000);
     }
 
-    private void testIsSlimeChunk(int percent, int expectedCount) {
+    @Order(-1001)
+    @Test
+    void testIsSlimeChunk100Point1Percent() {
+        testIsSlimeChunk(100.1, 100000);
+    }
+
+    @Order(-2000)
+    @Test
+    void testIsSlimeChunk200Percent() {
+        testIsSlimeChunk(200, 100000);
+    }
+
+    private void testIsSlimeChunk(double percent, int expectedCount) {
         Random random = RANDOM_SUPPLIER.get();
         LongSet newSeeds = new LongOpenHashSet();
         for (int i = 0; i < CASES; i++) {

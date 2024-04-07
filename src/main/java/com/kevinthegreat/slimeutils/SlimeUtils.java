@@ -2,6 +2,7 @@ package com.kevinthegreat.slimeutils;
 
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.math.random.ChunkRandom;
+import net.minecraft.util.math.random.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,10 @@ public class SlimeUtils implements ModInitializer {
         LOGGER.info(MOD_NAME + "initialized");
     }
 
+    public static boolean isSlimeChunk(int chunkX, int chunkZ, long seed, double percent) {
+        return isSlimeChunk(ChunkRandom.getSlimeRandom(chunkX, chunkZ, seed, SCRAMBLER), percent);
+    }
+
     /**
      * Check if a chunk is a slime chunk with a given percent chance deterministically, using an algorithm compatible with vanilla.
      *
@@ -24,8 +29,8 @@ public class SlimeUtils implements ModInitializer {
      * If given a smaller than 10 percent chance, only a subset of vanilla slime chunks will be slime chunks, and the given percent of all chunks will be slime chunks.
      * If given a greater than 10 percent chance, all vanilla slime chunks will be slime chunks, and the given percent of all chunks will be slime chunks.
      */
-    public static boolean isSlimeChunk(int chunkX, int chunkZ, long seed, int percent) {
-        int randomInt = ChunkRandom.getSlimeRandom(chunkX, chunkZ, seed, SCRAMBLER).nextInt(BOUND);
-        return randomInt % 10 < (percent - 1) / 10 || randomInt % 10 == (percent - 1) / 10 && randomInt < ((percent - 1) % 10 + 1) * (BOUND / 10);
+    public static boolean isSlimeChunk(Random random, double percent) {
+        int randomInt = random.nextInt(BOUND);
+        return randomInt % 10 < (int) (percent - 1) / 10 || randomInt % 10 == (int) (percent - 1) / 10 && randomInt < ((percent - 1) % 10 + 1) * (double) (BOUND / 10);
     }
 }
