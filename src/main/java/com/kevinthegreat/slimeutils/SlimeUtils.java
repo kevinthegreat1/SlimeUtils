@@ -1,8 +1,13 @@
 package com.kevinthegreat.slimeutils;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
+import net.fabricmc.fabric.api.gamerule.v1.rule.DoubleRule;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.GameRules;
+import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,8 +15,10 @@ public class SlimeUtils implements ModInitializer {
     private static final String MOD_ID = "slimeutils";
     private static final String MOD_NAME = "Slime Utils";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
-    static final long SCRAMBLER = 987234911L;
-    static final int BOUND = 2147483640;
+    public static final long SCRAMBLER = 987234911L;
+    public static final int BOUND = 2147483640;
+
+    public static final GameRules.Key<DoubleRule> SLIME_CHUNK_PERCENTAGE = GameRuleRegistry.register("slimeChunkPercentage", GameRules.Category.SPAWNING, GameRuleFactory.createDoubleRule(10, 0, 100));
 
     @Override
     public void onInitialize() {
@@ -20,6 +27,10 @@ public class SlimeUtils implements ModInitializer {
 
     public static boolean isSlimeChunk(int chunkX, int chunkZ, long seed, double percent) {
         return isSlimeChunk(ChunkRandom.getSlimeRandom(chunkX, chunkZ, seed, SCRAMBLER), percent);
+    }
+
+    public static boolean isSlimeChunk(Random random, World world) {
+        return isSlimeChunk(random, world.getGameRules().get(SLIME_CHUNK_PERCENTAGE).get());
     }
 
     /**

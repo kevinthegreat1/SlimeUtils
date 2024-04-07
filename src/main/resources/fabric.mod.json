@@ -3,7 +3,7 @@
 	"id": "slimeutils",
 	"version": "${version}",
 	"name": "Slime Utils",
-	"description": "Tweak slime chunk chances and show slime chunks",
+	"description": "Tweak slime chunk percentage and show slime chunks",
 	"authors": [
 		"Kevinthegreat"
 	],
@@ -21,6 +21,9 @@
 		],
 		"client": [
 			"com.kevinthegreat.slimeutils.SlimeUtilsClient"
+		],
+		"fabric-datagen": [
+			"com.kevinthegreat.slimeutils.SlimeUtilsDataGenerator"
 		]
 	},
 	"mixins": [

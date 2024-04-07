@@ -1,2 +1,2 @@
 # SlimeUtils
-Tweak slime chunk chances and show slime chunks
+Tweak slime chunk percentage and show slime chunks

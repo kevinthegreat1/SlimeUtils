@@ -30,6 +30,10 @@ loom {
 
 }
 
+fabricApi {
+	configureDataGeneration()
+}
+
 sourceSets {
 	test {
 		compileClasspath += client.compileClasspath
