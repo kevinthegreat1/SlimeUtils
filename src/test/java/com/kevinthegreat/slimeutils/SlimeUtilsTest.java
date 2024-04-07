@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SlimeUtilsTest {
-    private static final Supplier<Random> RANDOM_SUPPLIER = () -> Random.create(2358574256742911494L);
+    private static final Supplier<Random> RANDOM_SUPPLIER = () -> Random.create(-3914580377427605030L);
     private static final int CASES = 100000;
     private LongSet seeds;
 
@@ -30,61 +30,73 @@ public class SlimeUtilsTest {
     @Order(-1)
     @Test
     void testIsSlimeChunk0Point1Percent() {
-        testIsSlimeChunk(0.1, 98);
+        testIsSlimeChunk(0.1, 96);
     }
 
     @Order(-10)
     @Test
     void testIsSlimeChunk1Percent() {
-        testIsSlimeChunk(1, 944);
+        testIsSlimeChunk(1, 1005);
     }
 
     @Order(-20)
     @Test
     void testIsSlimeChunk2Percent() {
-        testIsSlimeChunk(2, 1908);
+        testIsSlimeChunk(2, 1976);
     }
 
     @Order(-90)
     @Test
     void testIsSlimeChunk9PercentDefault() {
-        testIsSlimeChunk(9, 8994);
+        testIsSlimeChunk(9, 9053);
+    }
+
+    @Order(-99)
+    @Test
+    void testIsSlimeChunk9Point9PercentDefault() {
+        testIsSlimeChunk(9.99, 10000);
     }
 
     @Order(-100)
     @Test
     void testIsSlimeChunk10PercentDefault() {
-        testIsSlimeChunk(10, 9992);
+        testIsSlimeChunk(10, 10007);
+    }
+
+    @Order(-101)
+    @Test
+    void testIsSlimeChunk10Point1PercentDefault() {
+        testIsSlimeChunk(10.01, 10018);
     }
 
     @Order(-110)
     @Test
     void testIsSlimeChunk11PercentDefault() {
-        testIsSlimeChunk(11, 11046);
+        testIsSlimeChunk(11, 10953);
     }
 
     @Order(-200)
     @Test
     void testIsSlimeChunk20Percent() {
-        testIsSlimeChunk(20, 20094);
+        testIsSlimeChunk(20, 19970);
     }
 
     @Order(-500)
     @Test
     void testIsSlimeChunk50Percent() {
-        testIsSlimeChunk(50, 49987);
+        testIsSlimeChunk(50, 49829);
     }
 
     @Order(-990)
     @Test
     void testIsSlimeChunk99Percent() {
-        testIsSlimeChunk(99, 98998);
+        testIsSlimeChunk(99, 99026);
     }
 
     @Order(-999)
     @Test
     void testIsSlimeChunk99Point9Percent() {
-        testIsSlimeChunk(99.9, 99896);
+        testIsSlimeChunk(99.9, 99900);
     }
 
     @Order(-1000)

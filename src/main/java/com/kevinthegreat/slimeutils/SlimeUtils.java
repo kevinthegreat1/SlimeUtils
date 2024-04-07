@@ -31,6 +31,6 @@ public class SlimeUtils implements ModInitializer {
      */
     public static boolean isSlimeChunk(Random random, double percent) {
         int randomInt = random.nextInt(BOUND);
-        return randomInt % 10 < (int) (percent - 1) / 10 || randomInt % 10 == (int) (percent - 1) / 10 && randomInt < ((percent - 1) % 10 + 1) * (double) (BOUND / 10);
+        return randomInt % 10 < (int) percent / 10 || randomInt % 10 < percent / 10 && randomInt < percent % 10 * BOUND / 10;
     }
 }
