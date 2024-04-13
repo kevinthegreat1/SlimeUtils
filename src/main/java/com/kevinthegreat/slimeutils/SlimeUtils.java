@@ -25,6 +25,10 @@ public class SlimeUtils implements ModInitializer {
         LOGGER.info(MOD_NAME + "initialized");
     }
 
+    public static boolean isSlimeChunk(int chunkX, int chunkZ, long seed, World world) {
+        return isSlimeChunk(chunkX, chunkZ, seed, world.getGameRules().get(SLIME_CHUNK_PERCENTAGE).get());
+    }
+
     public static boolean isSlimeChunk(int chunkX, int chunkZ, long seed, double percent) {
         return isSlimeChunk(ChunkRandom.getSlimeRandom(chunkX, chunkZ, seed, SCRAMBLER), percent);
     }

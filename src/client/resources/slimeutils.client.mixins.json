@@ -3,6 +3,8 @@
 	"package": "com.kevinthegreat.slimeutils.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
+		"minihud.OverlayRendererSlimeChunksMixin",
+		"minihud.RenderHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
