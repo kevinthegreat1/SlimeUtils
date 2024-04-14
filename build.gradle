@@ -32,6 +32,13 @@ repositories {
 			includeGroup "maven.modrinth"
 		}
 	}
+	maven {
+		url = uri("https://maven.pkg.github.com/kevinthegreat1/GameRuleLib")
+		credentials {
+			username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+			password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+		}
+	}
 }
 
 loom {
@@ -65,9 +72,10 @@ dependencies {
 
 	// Fabric API
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	include modImplementation("com.kevinthegreat:gamerulelib:${project.gamerulelib_version}")
 
-	modImplementation "curse.maven:minihud-244260:${project.minihud_version}"
-	modImplementation "maven.modrinth:slime:${project.slime_version}"
+	modCompileOnly "curse.maven:minihud-244260:${project.minihud_version}"
+	modCompileOnly "maven.modrinth:slime:${project.slime_version}"
 
 	testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
 }

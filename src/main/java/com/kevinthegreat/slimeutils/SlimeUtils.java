@@ -1,8 +1,9 @@
 package com.kevinthegreat.slimeutils;
 
+import com.kevinthegreat.gamerulelib.api.v1.SyncedGameRuleRegistry;
+import com.kevinthegreat.slimeutils.compatibility.MinihudCompatibility;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.gamerule.v1.rule.DoubleRule;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.Random;
@@ -18,11 +19,11 @@ public class SlimeUtils implements ModInitializer {
     public static final long SCRAMBLER = 987234911L;
     public static final int BOUND = 2147483640;
 
-    public static final GameRules.Key<DoubleRule> SLIME_CHUNK_PERCENTAGE = GameRuleRegistry.register("slimeChunkPercentage", GameRules.Category.SPAWNING, GameRuleFactory.createDoubleRule(10, 0, 100));
+    public static final GameRules.Key<DoubleRule> SLIME_CHUNK_PERCENTAGE = SyncedGameRuleRegistry.register("slimeChunkPercentage", GameRules.Category.SPAWNING, GameRuleFactory.createDoubleRule(10, 0, 100, (server, rule) -> MinihudCompatibility.setSlimeChunkOverlayNeedsUpdate()));
 
     @Override
     public void onInitialize() {
-        LOGGER.info(MOD_NAME + "initialized");
+        LOGGER.info(MOD_NAME + " initialized");
     }
 
     public static boolean isSlimeChunk(int chunkX, int chunkZ, long seed, World world) {
