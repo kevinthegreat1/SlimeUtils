@@ -3,7 +3,8 @@
 	"package": "com.kevinthegreat.slimeutils.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"SlimeEntityMixin"
+		"SlimeEntityMixin",
+		"slime.SlimeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
