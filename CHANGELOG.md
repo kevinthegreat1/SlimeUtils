@@ -1,4 +1,4 @@
-# Slime Utils
+# Slime Utils 1.0.0
 Tweak slime chunk percentage and show slime chunks
 
 ## Usage
