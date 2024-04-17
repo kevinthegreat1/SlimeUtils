@@ -20,6 +20,8 @@ public class SlimeUtilsDataGenerator implements DataGeneratorEntrypoint {
         @Override
         public void generateTranslations(TranslationBuilder translationBuilder) {
             translationBuilder.add("gamerule.slimeChunkPercentage", "Slime chunk percentage");
+            translationBuilder.add("slimeutils.slimeChunk", "Chunk %d, %d is a slime chunk");
+            translationBuilder.add("slimeutils.notSlimeChunk", "Chunk %d, %d is not a slime chunk");
         }
     }
 }

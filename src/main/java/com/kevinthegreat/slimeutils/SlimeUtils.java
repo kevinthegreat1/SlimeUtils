@@ -2,15 +2,25 @@ package com.kevinthegreat.slimeutils;
 
 import com.kevinthegreat.gamerulelib.api.v1.SyncedGameRuleRegistry;
 import com.kevinthegreat.slimeutils.compatibility.MinihudCompatibility;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.rule.DoubleRule;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.random.ChunkRandom;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class SlimeUtils implements ModInitializer {
     private static final String MOD_ID = "slimeutils";
@@ -23,7 +33,27 @@ public class SlimeUtils implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("slime").executes(SlimeUtils::getSlime)));
         LOGGER.info(MOD_NAME + " initialized");
+    }
+
+    @SuppressWarnings("SameReturnValue")
+    private static int getSlime(CommandContext<ServerCommandSource> context) {
+        ServerCommandSource source = context.getSource();
+        ServerPlayerEntity player = source.getPlayer();
+        if (player == null) {
+            source.sendError(Text.literal("You must be a player to use this command"));
+            return Command.SINGLE_SUCCESS;
+        }
+        int chunkX = player.getChunkPos().x;
+        int chunkZ = player.getChunkPos().z;
+        ServerWorld world = source.getWorld();
+        if (isSlimeChunk(chunkX, chunkZ, world.getSeed(), world)) {
+            source.sendFeedback(() -> Text.translatable("slimeutils.slimeChunk", chunkX, chunkZ).formatted(Formatting.GREEN), false);
+        } else {
+            source.sendFeedback(() -> Text.translatable("slimeutils.notSlimeChunk", chunkX, chunkZ), false);
+        }
+        return Command.SINGLE_SUCCESS;
     }
 
     public static boolean isSlimeChunk(int chunkX, int chunkZ, long seed, World world) {

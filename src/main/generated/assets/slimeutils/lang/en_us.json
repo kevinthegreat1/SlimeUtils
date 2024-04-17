@@ -1,3 +1,5 @@
 {
-  "gamerule.slimeChunkPercentage": "Slime chunk percentage"
+  "gamerule.slimeChunkPercentage": "Slime chunk percentage",
+  "slimeutils.notSlimeChunk": "Chunk %d, %d is not a slime chunk",
+  "slimeutils.slimeChunk": "Chunk %d, %d is a slime chunk"
 }
