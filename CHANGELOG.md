@@ -1,3 +1,6 @@
+# Slime Utils 1.0.1
+Updated to 1.20.5
+
 # Slime Utils 1.0.0
 Tweak slime chunk percentage and show slime chunks
 

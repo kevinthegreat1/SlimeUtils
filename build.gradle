@@ -4,7 +4,7 @@ plugins {
 	id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
 
-version = project.mod_version
+version = project.mod_version + '+' + project.minecraft_version
 group = project.maven_group
 
 base {
@@ -90,7 +90,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {
@@ -99,8 +99,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
@@ -141,15 +141,13 @@ publishMods {
 		projectId = "1004923"
 		projectSlug = "slime-utils" // Required for discord webhook
 		accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-		minecraftVersions.add("1.20.3")
-		minecraftVersions.add("1.20.4")
+		minecraftVersions.add("1.20.5")
 		requires("fabric-api")
 	}
 	modrinth {
 		projectId = "fXBqXSu1"
 		accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-		minecraftVersions.add("1.20.3")
-		minecraftVersions.add("1.20.4")
+		minecraftVersions.add("1.20.5")
 	}
 	github {
 		repository = "kevinthegreat1/SlimeUtils"
