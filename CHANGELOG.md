@@ -1,3 +1,6 @@
+# Slime Utils 1.0.2
+Support for 1.21 and 1.21.1
+
 # Slime Utils 1.0.1
 Updated to 1.20.5
 
